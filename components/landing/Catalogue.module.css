@@ -1,0 +1,337 @@
+.wrapper {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 3000px;
+}
+
+.section {
+  padding-block: var(--space-8);
+
+  @media (min-width: 768px) {
+    padding-block: var(--space-10);
+  }
+}
+
+.header {
+  margin-block-end: var(--space-7);
+  position: relative;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-end: var(--space-4);
+}
+
+.eyebrow {
+  /* inherits from utilities */
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent-from);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: var(--r-pill);
+}
+
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.56;
+  color: var(--muted);
+  max-inline-size: 640px;
+  margin-block-start: var(--space-4);
+}
+
+.browse {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  transition: color var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    color: var(--heading);
+  }
+
+  @media (max-width: 767px) {
+    position: static;
+    margin-block-start: var(--space-4);
+    display: inline-block;
+  }
+}
+
+/* ---- Module grid ---- */
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+
+  &:has(.card:hover) .card:not(:hover) {
+    opacity: 0.7;
+  }
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    border-color var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    opacity var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:hover .card__mock > * {
+    transform: scale(1.04);
+  }
+}
+
+.card__mock {
+  border-block-end: 1px solid var(--border);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
+}
+
+.card__mock > * {
+  inline-size: 100%;
+  block-size: 100%;
+  transition: transform var(--dur-hover) var(--ease-out);
+}
+
+.card__body {
+  padding: var(--space-4);
+}
+
+.card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin-block-end: var(--space-1);
+}
+
+.card__desc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Round type cards ---- */
+.round_card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    border-color var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    opacity var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.round_icon {
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: var(--r-sm);
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round_icon__inner {
+  inline-size: 16px;
+  block-size: 16px;
+  border-radius: 4px;
+  background: var(--accent-gradient);
+  opacity: 0.6;
+}
+
+/* ---- Templates ---- */
+.templates {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+
+  &:has(.template_card:hover) .template_card:not(:hover) {
+    opacity: 0.7;
+  }
+}
+
+.template_card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    border-color var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    opacity var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.template__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.preview_link {
+  font-size: 0.875rem;
+  color: var(--accent-from);
+  transition: color var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    color: var(--accent-to);
+  }
+}
+
+.template__mocks {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-3);
+  min-block-size: 280px;
+}
+
+.template__mock_tall {
+  grid-row: span 2;
+  block-size: 100%;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+}
+
+.template__mock_tall > * {
+  inline-size: 100%;
+  block-size: 100% !important;
+  aspect-ratio: unset !important;
+}
+
+.template__mock_stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  block-size: 100%;
+}
+
+.template__mock_stack > * {
+  flex: 1;
+  min-block-size: 0;
+  inline-size: 100%;
+  aspect-ratio: unset !important;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+/* ---- Role pages ---- */
+.roles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+
+  &:has(.role_card:hover) .role_card:not(:hover) {
+    opacity: 0.7;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.role_card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    border-color var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    opacity var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.role__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--body);
+}
+
+.role__ctas {
+  display: flex;
+  gap: var(--space-3);
+  margin-block-start: var(--space-2);
+}
+
+.role__mock {
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  aspect-ratio: 16 / 10;
+  min-block-size: 220px;
+}
+
+.role__mock > * {
+  inline-size: 100%;
+  block-size: 100%;
+}

@@ -1,0 +1,62 @@
+/* ============================================================
+   LOGO CLOUD — Infinite marquee with edge masks
+   ============================================================ */
+
+.section {
+  padding-block: var(--space-7);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.eyebrow {
+  text-align: center;
+  margin-block-end: var(--space-5);
+}
+
+.marqueeWrapper {
+  inline-size: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.trackGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding-inline: var(--space-4);
+}
+
+.logo {
+  font-size: 1.125rem;
+  color: var(--muted);
+  opacity: 0.6;
+  white-space: nowrap;
+  transition:
+    opacity var(--dur-hover) var(--ease-out),
+    color var(--dur-hover) var(--ease-out),
+    transform var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    opacity: 1;
+    color: var(--heading);
+    transform: translateY(-1px);
+  }
+}
+
+.stats { display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-4); margin-block-start:var(--space-5); color:var(--muted); font-size:.875rem; }
+.stats b { color:var(--heading); }

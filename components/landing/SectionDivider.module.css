@@ -1,0 +1,57 @@
+/* ============================================================
+   SECTION DIVIDER WITH LIGHT STREAK
+   ============================================================ */
+
+.divider {
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: var(--container-max);
+  margin-inline: auto;
+  block-size: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent 100%
+  );
+  overflow: hidden;
+}
+
+.streak {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: -25%;
+  inline-size: 25%;
+  block-size: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-from),
+    var(--white),
+    var(--accent-to),
+    transparent
+  );
+  animation: streak-travel 7s linear infinite;
+  will-change: transform;
+}
+
+@keyframes streak-travel {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translate3d(600%, 0, 0);
+  }
+}
+
+:global([data-inview="false"]) .streak {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak {
+    animation: none !important;
+    display: none;
+  }
+}

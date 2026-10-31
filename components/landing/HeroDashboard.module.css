@@ -1,0 +1,485 @@
+/* ============================================================
+   HERODASHBOARD — Fixed 1100x620 product dashboard canvas
+   Scaled down uniformly on smaller screens via container queries
+   ============================================================ */
+
+.wrapper {
+  container-type: inline-size;
+  inline-size: 100%;
+  max-inline-size: 1100px;
+  aspect-ratio: 1100 / 620;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: var(--surface);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 40px 120px -20px rgba(99, 102, 241, 0.3);
+  mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  user-select: none;
+}
+
+:global([data-theme="light"]) .wrapper {
+  border-color: rgba(0, 0, 0, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 30px 80px -20px rgba(99, 102, 241, 0.15);
+}
+
+/* Fixed 1100x620 design canvas, scaled uniformly via container width */
+.canvas {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 1100px;
+  block-size: 620px;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 1100px));
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--body);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   A. WINDOW BAR (40px)
+   ============================================================ */
+.windowBar {
+  block-size: 40px;
+  padding-inline: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-block-end: 1px solid var(--border);
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.015);
+}
+
+.windowLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  inline-size: 10px;
+  block-size: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotRed {
+  background-color: var(--bad);
+}
+
+.dotYellow {
+  background-color: var(--warn);
+}
+
+.dotGreen {
+  background-color: var(--ok);
+}
+
+.windowTitle {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tab {
+  block-size: 28px;
+  padding-inline: 12px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--dur-micro) var(--ease-out);
+}
+
+.tabActive {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-hover);
+  color: var(--heading);
+}
+
+:global([data-theme="light"]) .tabActive {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================
+   B. HEADER ROW (64px)
+   ============================================================ */
+.headerRow {
+  block-size: 64px;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pageTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--heading);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.pageSubtitle {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnPrimary {
+  block-size: 32px;
+  padding-inline: 16px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--accent-gradient);
+  color: var(--white);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+}
+
+.btnOutline {
+  block-size: 32px;
+  padding-inline: 16px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--heading);
+  border: 1px solid var(--border-hover);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ============================================================
+   C. STATS ROW (96px)
+   ============================================================ */
+.statsRow {
+  block-size: 96px;
+  margin-inline: 20px;
+  margin-block-start: 2px;
+  margin-block-end: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.statCard {
+  block-size: 96px;
+  padding: 14px 16px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.statTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.statChip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  line-height: 1;
+}
+
+.statChipOk {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--ok);
+}
+
+.statChipAccent {
+  background-color: rgba(139, 92, 246, 0.12);
+  color: var(--accent-to);
+}
+
+.statBottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.statNumber {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--heading);
+  line-height: 1;
+}
+
+.statSparkline {
+  display: block;
+  inline-size: 64px;
+  block-size: 28px;
+}
+
+/* ============================================================
+   D. PIPELINE BOARD (Fills remaining height)
+   ============================================================ */
+.board {
+  flex: 1;
+  min-block-size: 0;
+  margin-inline: 20px;
+  margin-block-end: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.col {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+:global([data-theme="light"]) .col {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+.colHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 2px;
+}
+
+.colTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.colCount {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--heading);
+  background-color: rgba(255, 255, 255, 0.06);
+  padding: 1px 6px;
+  border-radius: var(--r-pill);
+}
+
+:global([data-theme="light"]) .colCount {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.candidateList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.candidateCard {
+  block-size: 56px;
+  padding: 8px 10px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transition: border-color var(--dur-micro) var(--ease-out);
+}
+
+.candidateLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+}
+
+.avatar {
+  inline-size: 24px;
+  block-size: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.candidateMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-inline-size: 0;
+}
+
+.candidateName {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--heading);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.candidateRole {
+  font-size: 11px;
+  color: var(--subtle);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chip {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.chipOk {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--ok);
+}
+
+.chipWarn {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: var(--warn);
+}
+
+.chipAccent {
+  background-color: rgba(99, 102, 241, 0.14);
+  color: var(--accent-from);
+}
+
+.chipNeutral {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+}
+
+:global([data-theme="light"]) .chipNeutral {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================
+   E. LIVE TOAST (Pinned bottom-right inside canvas)
+   ============================================================ */
+.liveToast {
+  position: absolute;
+  inset-block-end: 16px;
+  inset-inline-end: 20px;
+  inline-size: 280px;
+  block-size: 48px;
+  background-color: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-hover);
+  border-radius: 10px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  animation: toast-cycle 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform, opacity;
+}
+
+:global([data-theme="light"]) .liveToast {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.toastText {
+  font-size: 13px;
+  color: var(--heading);
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes toast-cycle {
+  0% {
+    transform: translate3d(120%, 0, 0);
+    opacity: 0;
+  }
+  8%, 70% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  85%, 100% {
+    transform: translate3d(0, 8px, 0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liveToast {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

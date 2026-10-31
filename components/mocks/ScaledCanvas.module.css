@@ -1,0 +1,16 @@
+/* ============================================================
+   SCALED CANVAS STYLES
+   Container-query based scaling for fixed-pixel design surfaces
+   ============================================================ */
+
+.wrapper {
+  position: relative;
+  container-type: inline-size;
+  overflow: hidden;
+  inline-size: 100%;
+}
+
+.canvas {
+  transform-origin: top left;
+  transform: scale(calc(100cqw / var(--canvas-w)));
+}

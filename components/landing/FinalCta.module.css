@@ -1,0 +1,225 @@
+/* ============================================================
+   FINAL CTA SECTION STYLES
+   ============================================================ */
+
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-8);
+
+  @media (min-width: 768px) {
+    padding-block: var(--space-10);
+  }
+}
+
+.card {
+  position: relative;
+  max-inline-size: 1100px;
+  margin-inline: auto;
+  border-radius: var(--r-lg);
+  padding: var(--space-8) var(--space-5);
+  overflow: hidden;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+
+  @media (min-width: 768px) {
+    padding: var(--space-9) var(--space-8);
+  }
+}
+
+/* ---- Glowing Border Beam around the Card ---- */
+.borderBeam {
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 20%,
+    var(--accent-from) 40%,
+    var(--white) 50%,
+    var(--accent-to) 60%,
+    transparent 80%
+  );
+  animation: border-beam var(--dur-beam) linear infinite;
+  mask: linear-gradient(var(--white) 0 0) content-box, linear-gradient(var(--white) 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 1.5px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ---- Dimmed 3D Background Marquee ---- */
+.bgMarquee {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+.marqueeStage {
+  perspective: 1000px;
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 260px));
+  gap: var(--space-4);
+  inline-size: 100%;
+  transform: rotateX(48deg) rotateZ(-22deg) translate3d(0, -40px, 0);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.column {
+  overflow: hidden;
+  block-size: 680px;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  will-change: transform;
+}
+
+.track1 {
+  animation: cta-marquee-up 45s linear infinite;
+}
+
+.track2 {
+  animation: cta-marquee-down 55s linear infinite;
+}
+
+.track3 {
+  animation: cta-marquee-up 50s linear infinite;
+}
+
+:global([data-inview="false"]) .track {
+  animation-play-state: paused;
+}
+
+@keyframes cta-marquee-up {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes cta-marquee-down {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.mockCard {
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+}
+
+/* ---- Radial overlay for content readability ---- */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 650px 400px at center, var(--card) 40%, transparent 95%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Card Content ---- */
+.content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.avatars {
+  display: flex;
+  margin-block-end: var(--space-2);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--white);
+  border: 2px solid var(--card);
+  margin-inline-start: -10px;
+
+  &:first-child {
+    margin-inline-start: 0;
+  }
+}
+
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.56;
+  color: var(--muted);
+  max-inline-size: 540px;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-block-start: var(--space-2);
+}
+
+.primaryCta {
+  box-shadow: var(--shadow-cta-glow);
+}
+
+.secondaryCta {
+  gap: var(--space-2);
+}
+
+/* ============================================================
+   REDUCED MOTION GUARDS
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .borderBeam {
+    animation: none !important;
+  }
+
+  .grid {
+    transform: none !important;
+  }
+
+  .track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .mockCard:nth-child(n + 5) {
+    display: none;
+  }
+}

@@ -1,0 +1,110 @@
+.trigger {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.play_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 48px;
+  block-size: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: var(--heading);
+  font-size: 1rem;
+  transition: transform var(--dur-hover) var(--ease-out),
+    background var(--dur-hover) var(--ease-out);
+
+  .trigger:hover & {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.dialog {
+  max-inline-size: 800px;
+  inline-size: 90vw;
+  max-block-size: 90dvh;
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+  }
+}
+
+@supports (overlay: auto) {
+  .dialog {
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      overlay var(--dur-reveal) var(--ease-out) allow-discrete,
+      display var(--dur-reveal) var(--ease-out) allow-discrete;
+  }
+
+  @starting-style {
+    .dialog[open] {
+      opacity: 0;
+    }
+  }
+}
+
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-block-end: 1px solid var(--border);
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: var(--r-pill);
+  color: var(--muted);
+  transition: color var(--dur-hover) var(--ease-out),
+    background-color var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    color: var(--heading);
+    background-color: var(--card-hover);
+  }
+}
+
+.player {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card);
+}
+
+.placeholder {
+  color: var(--muted);
+  font-size: 0.875rem;
+}

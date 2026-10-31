@@ -1,0 +1,109 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-8);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+
+  @media (min-width: 768px) {
+    padding-block: var(--space-10);
+  }
+}
+
+.header {
+  text-align: center;
+  margin-block-end: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.56;
+  color: var(--muted);
+  max-inline-size: 640px;
+}
+
+.email {
+  color: var(--accent-from);
+  transition: color var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    color: var(--accent-to);
+  }
+}
+
+.list {
+  max-inline-size: 768px;
+  margin-inline: auto;
+}
+
+.item {
+  border-block-end: 1px solid var(--border);
+
+  &:first-child {
+    border-block-start: 1px solid var(--border);
+  }
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--heading);
+  cursor: pointer;
+  transition: color var(--dur-hover) var(--ease-out);
+
+  &:hover {
+    color: var(--accent-from);
+  }
+}
+
+.chevron {
+  flex-shrink: 0;
+  transition: transform var(--dur-hover) var(--ease-out);
+  color: var(--muted);
+}
+
+details[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.answer {
+  padding-block-end: var(--space-5);
+  padding-inline-end: var(--space-7);
+
+  & p {
+    font-size: 1rem;
+    line-height: 1.625;
+    color: var(--muted);
+  }
+}
+
+/* Animated content reveal (progressive enhancement) */
+@supports selector(::details-content) {
+  .item::details-content {
+    transition: block-size var(--dur-reveal) var(--ease-out),
+      opacity var(--dur-reveal) var(--ease-out);
+    block-size: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+@supports (interpolate-size: allow-keywords) {
+  .item {
+    interpolate-size: allow-keywords;
+  }
+}
